@@ -4,7 +4,6 @@ export default {
         updateResourceId(value) {
             const fields = this.$parent.resource.fields;
             let formData = new FormData();
-            this.isBelongsToField(fields);
             Object.keys(fields).forEach((key)=> {
                 if (fields[key].attribute !== this.field.attribute){
                     if (fields[key].belongsToId === undefined) {
@@ -37,14 +36,5 @@ export default {
             return options[idx].label
         },
 
-        isBelongsToField(fields){
-            let isBelongsToField = false;
-            Object.keys(fields).forEach((key) => {
-                isBelongsToField = true;
-            })
-
-            return isBelongsToField;
-
-        }
     }
 }

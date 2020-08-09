@@ -22864,7 +22864,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var fields = this.$parent.resource.fields;
             var formData = new FormData();
-            this.isBelongsToField(fields);
             Object.keys(fields).forEach(function (key) {
                 if (fields[key].attribute !== _this.field.attribute) {
                     if (fields[key].belongsToId === undefined) {
@@ -22892,14 +22891,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return options[key].value == value;
             });
             return options[idx].label;
-        },
-        isBelongsToField: function isBelongsToField(fields) {
-            var isBelongsToField = false;
-            Object.keys(fields).forEach(function (key) {
-                isBelongsToField = true;
-            });
-
-            return isBelongsToField;
         }
     }
 });
