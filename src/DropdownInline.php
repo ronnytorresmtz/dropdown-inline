@@ -3,6 +3,7 @@
 namespace Ronnytorresmtz\DropdownInline;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class DropdownInline extends Field
 {

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -256,7 +256,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(9);
+__webpack_require__(10);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -2749,23 +2749,66 @@ var autoReplace = function autoReplace() {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        updateResourceId: function updateResourceId(value) {
+            var _this = this;
+
+            var fields = this.$parent.resource.fields;
+            var formData = new FormData();
+            Object.keys(fields).forEach(function (key) {
+                if (fields[key].attribute !== _this.field.attribute) {
+                    if (fields[key].belongsToId === undefined) {
+                        formData.append(fields[key].attribute, fields[key].value);
+                    } else {
+                        formData.append(fields[key].attribute, fields[key].belongsToId);
+                    }
+                } else {
+                    formData.append(fields[key].attribute, value);
+                }
+            });
+
+            formData.append('_method', 'PUT');
+
+            return Nova.request().post('/nova-api/' + this.resourceName + '/' + this.resourceId, formData).then(function () {
+                var option = _this.getOptionLabel(_this.field.options, value);
+                _this.$toasted.show(_this.field.name + ' updated to "' + option + '"', { type: 'success' });
+            }, function (response) {
+                _this.$toasted.show(response, { type: 'error' });
+                console.log(response);
+            });
+        },
+        getOptionLabel: function getOptionLabel(options, value) {
+            var idx = Object.keys(options).find(function (key) {
+                return options[key].value == value;
+            });
+            return options[idx].label;
+        }
+    }
+});
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(6);
+__webpack_require__(7);
 module.exports = __webpack_require__(24);
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_svg_core__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fortawesome_free_solid_svg_icons__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fortawesome_vue_fontawesome__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fortawesome_free_solid_svg_icons__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fortawesome_vue_fontawesome__ = __webpack_require__(13);
 
 
 
@@ -2774,7 +2817,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_svg_core__["c" /* library */].add(__WEBPACK_IMPORTED_MODULE_2__fortawesome_free_solid_svg_icons__["a" /* faSpinner */]);
 
 Nova.booting(function (Vue, router, store) {
-  Vue.component('index-dropdown-inline', __webpack_require__(13));
+  Vue.component('index-dropdown-inline', __webpack_require__(14));
   Vue.component('detail-dropdown-inline', __webpack_require__(17));
   Vue.component('form-dropdown-inline', __webpack_require__(20));
 
@@ -2782,18 +2825,18 @@ Nova.booting(function (Vue, router, store) {
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {
   module.exports = require('./vue.common.prod.js')
 } else {
-  module.exports = __webpack_require__(8)
+  module.exports = __webpack_require__(9)
 }
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14760,7 +14803,7 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(2).setImmediate))
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -14950,10 +14993,10 @@ module.exports = Vue;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(11)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -15143,7 +15186,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22157,7 +22200,7 @@ var _iconsCache = {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22703,13 +22746,13 @@ var FontAwesomeLayersText = {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(14)
+var __vue_script__ = __webpack_require__(15)
 /* template */
 var __vue_template__ = __webpack_require__(16)
 /* template functional */
@@ -22750,13 +22793,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_general__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_requests__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_requests__ = __webpack_require__(5);
 //
 //
 //
@@ -22848,49 +22891,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateFieldStatus: function updateFieldStatus(value) {
             this.updateResourceId(value);
             this.isEditable = false;
-        }
-    }
-});
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        updateResourceId: function updateResourceId(value) {
-            var _this = this;
-
-            var fields = this.$parent.resource.fields;
-            var formData = new FormData();
-            Object.keys(fields).forEach(function (key) {
-                if (fields[key].attribute !== _this.field.attribute) {
-                    if (fields[key].belongsToId === undefined) {
-                        formData.append(fields[key].attribute, fields[key].value);
-                    } else {
-                        formData.append(fields[key].attribute, fields[key].belongsToId);
-                    }
-                } else {
-                    formData.append(fields[key].attribute, value);
-                }
-            });
-
-            formData.append('_method', 'PUT');
-
-            return Nova.request().post('/nova-api/' + this.resourceName + '/' + this.resourceId, formData).then(function () {
-                var option = _this.getOptionLabel(_this.field.options, value);
-                _this.$toasted.show(_this.field.name + ' updated to "' + option + '"', { type: 'success' });
-            }, function (response) {
-                _this.$toasted.show(response, { type: 'error' });
-                console.log(response);
-            });
-        },
-        getOptionLabel: function getOptionLabel(options, value) {
-            var idx = Object.keys(options).find(function (key) {
-                return options[key].value == value;
-            });
-            return options[idx].label;
         }
     }
 });
@@ -23038,7 +23038,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(5);
 //
 //
 //
