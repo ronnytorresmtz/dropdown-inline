@@ -15,7 +15,7 @@
                 <option value="0" selected @change.prevent="handleChange(value)" @keydown.esc.prevent="onKeyDownEscape()" >{{ __('Choose an option') }}</option>
             </select-control>
         </span>
-        <span v-else :class="`whitespace-no-wrap ${(field.inlineOnIndex) ? 'cursor-pointer' : ''}`" @click="openDropdown">{{ (field.displayUsingLabels) ? getOptionLabel(field.options, value) : value }}</span>
+        <span v-else :class="`whitespace-no-wrap ${(field.inlineOnIndex) ? 'cursor-pointer' : 'cursor-default'}`" @click="openDropdown">{{ (field.displayUsingLabels) ? getOptionLabel(field.options, value) : value }}</span>
     </div>
 </template>
 
