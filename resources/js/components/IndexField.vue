@@ -12,7 +12,7 @@
                 @change.prevent="handleChange(value)"
                 @keydown.esc.prevent="onKeyDownEscape()">
 
-                <option value="" selected >{{ __('Choose an option') }}</option>
+                <option value="0" selected @change.prevent="handleChange(value)" @keydown.esc.prevent="onKeyDownEscape()" >{{ __('Choose an option') }}</option>
             </select-control>
         </span>
         <span v-else :class="`whitespace-no-wrap ${(field.inlineOnIndex) ? 'cursor-pointer' : ''}`" @click="openDropdown">{{ (field.displayUsingLabels) ? getOptionLabel(field.options, value) : value }}</span>
@@ -53,13 +53,13 @@ export default {
          * Set the initial, internal value for the field.
          */
         setInitialValue() {
-            this.value = this.field.value || ''
+            this.value = (this.field.value === null || this.field.value === 0) ? 0 : this.field.value;
         },
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.attribute, this.value || '')
+            formData.append(this.field.attribute, this.value || null)
         },
         
         closeEdit() {
@@ -75,19 +75,9 @@ export default {
         */
         handleChange(value) {
             this.value = value
-            if (value) {
-                this.updateFieldStatus(value);
-            }
-            
-        },
-        /**
-        * Update the resources id  with the new value.
-        */
-        updateFieldStatus(value) {
-            this.updateResourceId(value);
             this.isEditable = false;
-        }
-
+            this.updateResourceId(this.field, value);
+        },
         
     },
 }
