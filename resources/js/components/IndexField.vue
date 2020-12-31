@@ -76,7 +76,7 @@ export default {
         handleChange(value) {
             this.value = value
             this.isEditable = false;
-            this.updateResourceId(this.field, value);
+            this.updateResourceId(this.$parent.resource.fields, this.field, value);
         },
         
     },

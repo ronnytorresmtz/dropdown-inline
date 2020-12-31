@@ -1,15 +1,19 @@
 export default {
     methods: {
 
-        updateResourceId(field, value) {
+        updateResourceId(fields, field, value) {
+
             let formData = new FormData();
-            formData.append(this.field.attribute, this.value || null)
+            fields.forEach(function(field){
+                formData.append(field.attribute, field.value);
+            });
+            formData.append(field.attribute, value || null)
             formData.append('_method', 'PUT');
 
             return Nova.request().post(`/nova-api/${this.resourceName}/${this.resourceId}`, formData)
                 .then(() => {
-                    const option = this.getOptionLabel(this.field.options, value);
-                    this.$toasted.show(`${this.field.name} updated to "${option}"`, { type: 'success' });
+                    const option = this.getOptionLabel(field.options, value);
+                    this.$toasted.show(`${field.name} updated to "${option}"`, { type: 'success' });
                 }, (response) => {
                     this.$toasted.show(response, { type: 'error' });
                     console.log(response.response);
