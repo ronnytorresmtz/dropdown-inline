@@ -5,7 +5,7 @@ export default {
 
             let formData = new FormData();
             fields.forEach(function(field){
-                formData.append(field.attribute, field.value);
+                formData.append(field.attribute, (field.value == '—') ? '' : field.value);
             });
             formData.append(field.attribute, value || null)
             formData.append('_method', 'PUT');
