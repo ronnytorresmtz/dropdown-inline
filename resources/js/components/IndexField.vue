@@ -34,7 +34,7 @@ export default {
     created() {
         this.setInitialValue();
          document.addEventListener('keyup', (evt) => {
-            if (evt.keyCode === 27) {
+            if (evt.code === 'Escape') {
                 this.closeEdit();
             }
         });
@@ -53,7 +53,7 @@ export default {
          * Set the initial, internal value for the field.
          */
         setInitialValue() {
-            this.value = (this.field.value === null || this.field.value === 0) ? 0 : this.field.value;
+            this.value = (this.field.value == 'null') ? 0 : this.field.value;
         },
         /**
          * Fill the given FormData object with the field's internal value.

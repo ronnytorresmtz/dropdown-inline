@@ -18,13 +18,17 @@ export default {
         },
         
         getOptionLabel(options, value) {
-            if (value == 0) {
-                return '—';
-            }
+            
             const idx = Object.keys(options).find((key) => {
                 return options[key].value == value;
             });
-            return options[idx].label
+
+            if (idx) {
+                return options[idx].label
+            } 
+            
+            return '—'; 
+            
         },
 
     }
