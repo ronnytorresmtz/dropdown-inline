@@ -13,12 +13,11 @@ export default {
                     this.$toasted.show(`${field.name} updated to "${option}"`, { type: 'success' });
                 }, (response) => {
                     this.$toasted.show(response, { type: 'error' });
-                    console.log(response.response);
                 })
         },
         
         getOptionLabel(options, value) {
-            
+
             const idx = Object.keys(options).find((key) => {
                 return options[key].value == value;
             });
