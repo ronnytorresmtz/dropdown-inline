@@ -12,7 +12,7 @@
                 @change.prevent="handleChange(value)"
                 @keydown.esc.prevent="onKeyDownEscape()">
 
-                <option value="0" selected @change.prevent="handleChange(value)" @keydown.esc.prevent="onKeyDownEscape()" >{{ __('Choose an option') }}</option>
+                <!-- <option value="0" selected @change.prevent="handleChange(value)" @keydown.esc.prevent="onKeyDownEscape()" >{{ __('Choose an option') }}</option> -->
             </select-control>
         </span>
         <span v-else :class="`whitespace-no-wrap ${(field.inlineOnIndex) ? 'cursor-pointer' : 'cursor-default'}`" @click="openDropdown">{{ (field.displayUsingLabels) ? getOptionLabel(field.options, value) : value }}</span>
@@ -53,7 +53,8 @@ export default {
          * Set the initial, internal value for the field.
          */
         setInitialValue() {
-            this.value = (this.field.value == 'null') ? 0 : this.field.value;
+            // this.value = (this.field.value == 'null') ? 0 : this.field.value;
+            this.value = this.field.value;
         },
         /**
          * Fill the given FormData object with the field's internal value.
